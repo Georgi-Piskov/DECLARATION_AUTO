@@ -17,15 +17,63 @@ const payload = (() => {
 
 function renderFiles(){
   filesList.innerHTML = '';
-  if (n8n?.decl11PdfUrl || n8n?.decl38PdfUrl){
+  // Helper: open printable HTML in a new tab and auto-trigger print
+  const ensurePrintable = (html) => {
+    if (!html) return '';
+    if (/<\/body>/i.test(html)){
+      return html.replace(/<\/body>/i, '<script>window.addEventListener("load",()=>{setTimeout(()=>{window.print()},200);});<\/script></body>');
+    }
+    return `<!doctype html><html lang="bg"><meta charset="utf-8"><title>Документ</title><meta name="viewport" content="width=device-width, initial-scale=1" /><body>${html}<script>window.addEventListener('load',()=>{setTimeout(()=>{window.print()},200);});<\/script></body></html>`;
+  };
+
+  const openPrintHtml = (html, title='Документ') => {
+    const doc = ensurePrintable(html);
+    const blob = new Blob([doc], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const w = window.open(url, '_blank');
+    if (!w) alert('Позволете изскачащи прозорци, за да отпечатате документа.');
+  };
+
+  const addDownloadLink = (parent, html, filename) => {
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.textContent = 'Свали .HTML';
+    a.className = 'secondary';
+    parent.appendChild(a);
+  };
+
+  if (n8n?.decl11PdfUrl || n8n?.decl38PdfUrl || n8n?.decl11Html || n8n?.decl38Html){
     if (n8n.decl11PdfUrl){
       const li = document.createElement('li');
       li.innerHTML = `📄 <a target="_blank" rel="noopener" href="${n8n.decl11PdfUrl}">Декларация за неактивност – Прил. №11</a>`;
       filesList.appendChild(li);
     }
+    if (n8n.decl11Html && !n8n.decl11PdfUrl){
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.textContent = '🖨 Отвори и принтирай – Прил. №11';
+      btn.onclick = () => openPrintHtml(n8n.decl11Html, 'Прил. №11');
+      li.appendChild(btn);
+      li.appendChild(document.createTextNode(' '));
+      addDownloadLink(li, n8n.decl11Html, 'Pril11.html');
+      filesList.appendChild(li);
+    }
     if (n8n.decl38PdfUrl){
       const li = document.createElement('li');
       li.innerHTML = `📄 <a target="_blank" rel="noopener" href="${n8n.decl38PdfUrl}">Декларация по чл. 38, ал. 9, т. 2 ЗСч</a>`;
+      filesList.appendChild(li);
+    }
+    if (n8n.decl38Html && !n8n.decl38PdfUrl){
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.textContent = '🖨 Отвори и принтирай – чл. 38, ал. 9, т. 2 ЗСч';
+      btn.onclick = () => openPrintHtml(n8n.decl38Html, 'Декларация по чл. 38, ал. 9, т. 2 ЗСч');
+      li.appendChild(btn);
+      li.appendChild(document.createTextNode(' '));
+      addDownloadLink(li, n8n.decl38Html, 'ZSCh38.html');
       filesList.appendChild(li);
     }
   } else {
@@ -64,4 +112,3 @@ ${payload.phone}`;
 renderFiles();
 renderAdvice();
 renderEmail();
-
