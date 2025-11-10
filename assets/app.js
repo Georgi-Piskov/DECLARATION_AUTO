@@ -35,6 +35,11 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
+  // Серилизираме ВСИЧКИ полета от формата (заедно с оригиналните ключове)
+  const fd = new FormData(form);
+  const formFields = {};
+  fd.forEach((v, k) => { formFields[k] = typeof v === 'string' ? v.trim() : v; });
+
   const payload = {
     eik: form.eik.value.trim(),
     companyName: form.name.value.trim(),
@@ -46,8 +51,11 @@ form.addEventListener('submit', async (e) => {
     reportYear: form.year.value.trim(),
     city: form.city.value.trim(),
     date: form.date.value,
-    role: form.role.value
+    role: form.role.value,
+    formFields, // пълно копие на всички полета
+    meta: { ts: new Date().toISOString(), ua: navigator.userAgent, page: location.href }
   };
+  console.log('Payload към n8n:', payload);
 
   // Запази локално (за всеки случай)
   localStorage.setItem('companyPayload', JSON.stringify(payload));

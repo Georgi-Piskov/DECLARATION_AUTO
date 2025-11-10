@@ -1,4 +1,4 @@
-const CACHE = 'decl-pwa-v5';
+const CACHE = 'decl-pwa-v6';
 const ASSETS = [
   'index.html',
   'results.html',
