@@ -58,16 +58,25 @@ form.addEventListener('submit', async (e) => {
     if (!window.N8N_WEBHOOK_URL){
       console.warn('N8N_WEBHOOK_URL не е зададен. Ще продължим без POST.');
     } else {
+      // При webhook-test в n8n, OPTIONS preflight може да "изяде" слушането.
+      // За да избегнем preflight при тест, изпращаме като text/plain.
+      const isTest = /webhook-test\//.test(window.N8N_WEBHOOK_URL);
+      const body = JSON.stringify(payload);
+      const headers = isTest ? { 'Content-Type':'text/plain;charset=UTF-8' } : { 'Content-Type':'application/json' };
+      console.log('Изпращам към n8n:', window.N8N_WEBHOOK_URL, { isTest });
       const res = await fetch(window.N8N_WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type':'application/json' },
-        body: JSON.stringify(payload)
+        mode: 'cors',
+        headers,
+        body
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       n8nResponse = await res.json();
     }
   }catch(err){
     console.error('Грешка при изпращане към n8n:', err);
+    errEl.textContent = 'Грешка при изпращане към n8n. Вижте конзолата (F12 → Console).';
+    errEl.hidden = false;
   }
 
   if (n8nResponse){
@@ -79,4 +88,3 @@ form.addEventListener('submit', async (e) => {
   // Редирект към резултатите
   window.location.href = 'results.html';
 });
-
