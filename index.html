@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Декларации за фирма без дейност</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <meta name="theme-color" content="#0e2a47">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="container">
+    <h1>Генериране на декларации</h1>
+    <p class="subtitle">Декларация за неактивност (Прил. № 11) и Декларация по чл. 38, ал. 9, т. 2 ЗСч</p>
+  </header>
+
+  <main class="container card">
+    <form id="companyForm" novalidate>
+      <div class="grid">
+        <div class="field">
+          <label for="eik">ЕИК / Булстат *</label>
+          <input id="eik" name="eik" inputmode="numeric" pattern="\d{9}|\d{13}" required placeholder="9 или 13 цифри">
+          <small class="hint">Само цифри, 9 или 13 символа</small>
+        </div>
+        <div class="field">
+          <label for="name">Наименование на дружеството *</label>
+          <input id="name" name="name" required placeholder="БАРИН АЛП ЕООД">
+        </div>
+        <div class="field">
+          <label for="legal">Правна форма *</label>
+          <select id="legal" name="legal" required>
+            <option value="">— изберете —</option>
+            <option>ЕООД</option>
+            <option>ООД</option>
+            <option>АД</option>
+            <option>ЕТ</option>
+            <option>СД</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="address">Седалище и адрес *</label>
+          <input id="address" name="address" required placeholder="гр. София, ул. ... №...">
+        </div>
+        <div class="field">
+          <label for="manager">Представляващ (име) *</label>
+          <input id="manager" name="manager" required placeholder="Име Фамилия">
+        </div>
+        <div class="field">
+          <label for="email">E-mail *</label>
+          <input id="email" name="email" type="email" required placeholder="name@example.com">
+        </div>
+        <div class="field">
+          <label for="phone">Телефон *</label>
+          <input id="phone" name="phone" required placeholder="+359 ...">
+        </div>
+        <div class="field">
+          <label for="year">Година на отчета *</label>
+          <input id="year" name="year" required pattern="\d{4}" placeholder="2025">
+        </div>
+        <div class="field">
+          <label for="city">Населено място *</label>
+          <input id="city" name="city" required placeholder="гр. София">
+        </div>
+        <div class="field">
+          <label for="date">Дата *</label>
+          <input id="date" name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label for="role">Подал декларацията *</label>
+          <select id="role" name="role" required>
+            <option value="">— изберете —</option>
+            <option>Управител</option>
+            <option>Счетоводител</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="nextBtn" disabled>Напред</button>
+      </div>
+      <p id="formError" class="error" hidden></p>
+    </form>
+  </main>
+
+  <footer class="container footnote">
+    <p>Данните се изпращат към n8n webhook за автоматично генериране на PDF декларации.</p>
+  </footer>
+
+  <script src="assets/config.js"></script>
+  <script type="module" src="assets/app.js"></script>
+  <noscript>За да използвате приложението, активирайте JavaScript.</noscript>
+</body>
+</html>
+

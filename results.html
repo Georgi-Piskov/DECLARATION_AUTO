@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Готови декларации</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <meta name="theme-color" content="#0e2a47">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="container">
+    <h1>Готови декларации</h1>
+    <p class="subtitle">Изтегляне и инструкции за подаване</p>
+  </header>
+
+  <main class="container grid-2">
+    <section class="card">
+      <h2>Файлове</h2>
+      <ul id="filesList" class="file-list">
+        <li>Изчаквам връщане от n8n…</li>
+      </ul>
+      <div class="actions">
+        <a href="index.html" class="secondary">⬅ Назад</a>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h2>Съвети за подаване</h2>
+      <div id="adviceBox" class="prose">
+        <p>Ще се заредят съвети от n8n…</p>
+      </div>
+      <h3>Примерен имейл</h3>
+      <pre id="emailExample" class="codeblock">Очаква се примерен имейл от n8n…</pre>
+    </aside>
+  </main>
+
+  <footer class="container footnote">
+    <p>Съхранени данни: само локално в браузъра, докато приключите процеса.</p>
+  </footer>
+
+  <script src="assets/config.js"></script>
+  <script type="module" src="assets/results.js"></script>
+  <noscript>За да използвате приложението, активирайте JavaScript.</noscript>
+</body>
+</html>
+

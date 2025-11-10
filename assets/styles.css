@@ -1,0 +1,48 @@
+:root{
+  --bg:#0b1e34;
+  --card:#102843;
+  --text:#e8f0ff;
+  --muted:#9eb4d1;
+  --accent:#4db3ff;
+  --ok:#28c76f;
+  --err:#ff5c5c;
+  --border: #22466f;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color:var(--text); background:linear-gradient(180deg, #0a1a2c, var(--bg));
+}
+.container{width:min(960px, 92%); margin:0 auto; padding:1rem}
+h1{margin:0.5rem 0 0}
+.subtitle{color:var(--muted); margin:0.25rem 0 1rem}
+.card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; padding:1rem; box-shadow:0 8px 24px rgba(0,0,0,.25)
+}
+.grid{display:grid; gap:1rem; grid-template-columns:1fr 1fr}
+.grid-2{display:grid; gap:1rem; grid-template-columns:1.2fr .8fr}
+@media (max-width: 840px){ .grid, .grid-2{grid-template-columns:1fr} }
+
+.field label{display:block; margin-bottom:.35rem}
+.field input, .field select, .field textarea{
+  width:100%; padding:.7rem .8rem; border-radius:10px; border:1px solid var(--border);
+  background:#0d223a; color:var(--text); outline:none;
+}
+.field input:focus, .field select:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(77,179,255,.2)}
+.hint{color:var(--muted); font-size:.85rem}
+.actions{margin-top:1rem; display:flex; gap:.6rem}
+button, .secondary, a.button{
+  appearance:none; border:none; border-radius:12px; padding:.8rem 1.1rem; cursor:pointer;
+  text-decoration:none; color:white; background:linear-gradient(180deg, #2b8bff, #176bcd);
+}
+button[disabled]{opacity:.5; cursor:not-allowed}
+.secondary{background:#1a3a5f; border:1px solid var(--border)}
+.error{color:var(--err)}
+.file-list{list-style:none; padding-left:0}
+.file-list li{padding:.4rem 0}
+.prose p, .prose ul{margin:.4rem 0}
+.codeblock{background:#0a1f36; border:1px solid var(--border); padding:.8rem; border-radius:10px; overflow:auto}
+.footnote{color:var(--muted); font-size:.9rem; text-align:center; margin:1rem auto}
+
