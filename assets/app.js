@@ -45,7 +45,7 @@ form.addEventListener('submit', async (e) => {
     companyName: form.name.value.trim(),
     legalForm: form.legal.value,
     address: form.address.value.trim(),
-    manager: form.manager.value.trim(),
+    manager: form.manager.value.trim(),`n    egn: form.egn ? form.egn.value.trim() : "",
     email: form.email.value.trim(),
     phone: form.phone.value.trim(),
     reportYear: form.year.value.trim(),
@@ -96,4 +96,5 @@ form.addEventListener('submit', async (e) => {
   // Р РµРґРёСЂРµРєС‚ РєСЉРј СЂРµР·СѓР»С‚Р°С‚РёС‚Рµ
   window.location.href = 'results.html';
 });
+
 
