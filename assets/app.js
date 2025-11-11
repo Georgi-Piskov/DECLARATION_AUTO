@@ -15,11 +15,9 @@ const yearEl = document.getElementById('year');
   const today = new Date();
   dateEl.value = today.toISOString().slice(0,10);
   yearEl.value = String(today.getFullYear());
-})();
+}\)();\nupdateNextState();
 
-form.addEventListener('input', () => {
-  nextBtn.disabled = !form.checkValidity() || !isEikValid();
-});
+function updateNextState(){\n  nextBtn.disabled = !(form.checkValidity() && isEikValid());\n}\n['input','change'].forEach(evt=>form.addEventListener(evt, updateNextState));
 
 function isEikValid(){
   const eik = form.eik.value.trim();
@@ -96,5 +94,6 @@ form.addEventListener('submit', async (e) => {
   // Р РµРґРёСЂРµРєС‚ РєСЉРј СЂРµР·СѓР»С‚Р°С‚РёС‚Рµ
   window.location.href = 'results.html';
 });
+
 
 
