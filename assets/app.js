@@ -1,4 +1,4 @@
-// Регистрация на Service Worker за PWA (относителен път за GitHub Pages)
+﻿// Р РµРіРёСЃС‚СЂР°С†РёСЏ РЅР° Service Worker Р·Р° PWA (РѕС‚РЅРѕСЃРёС‚РµР»РµРЅ РїСЉС‚ Р·Р° GitHub Pages)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(console.error);
@@ -30,12 +30,12 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   errEl.hidden = true;
   if (!form.checkValidity() || !isEikValid()){
-    errEl.textContent = 'Моля, проверете попълнените полета (ЕИК: 9 или 13 цифри).';
+    errEl.textContent = 'РњРѕР»СЏ, РїСЂРѕРІРµСЂРµС‚Рµ РїРѕРїСЉР»РЅРµРЅРёС‚Рµ РїРѕР»РµС‚Р° (Р•РРљ: 9 РёР»Рё 13 С†РёС„СЂРё).';
     errEl.hidden = false;
     return;
   }
 
-  // Серилизираме ВСИЧКИ полета от формата (заедно с оригиналните ключове)
+  // РЎРµСЂРёР»РёР·РёСЂР°РјРµ Р’РЎРР§РљР РїРѕР»РµС‚Р° РѕС‚ С„РѕСЂРјР°С‚Р° (Р·Р°РµРґРЅРѕ СЃ РѕСЂРёРіРёРЅР°Р»РЅРёС‚Рµ РєР»СЋС‡РѕРІРµ)
   const fd = new FormData(form);
   const formFields = {};
   fd.forEach((v, k) => { formFields[k] = typeof v === 'string' ? v.trim() : v; });
@@ -51,27 +51,27 @@ form.addEventListener('submit', async (e) => {
     reportYear: form.year.value.trim(),
     city: form.city.value.trim(),
     date: form.date.value,
-    role: form.role.value,
-    formFields, // пълно копие на всички полета
+    role: form.role.value,`n    ownership: form.ownership.value,
+    formFields, // РїСЉР»РЅРѕ РєРѕРїРёРµ РЅР° РІСЃРёС‡РєРё РїРѕР»РµС‚Р°
     meta: { ts: new Date().toISOString(), ua: navigator.userAgent, page: location.href }
   };
-  console.log('Payload към n8n:', payload);
+  console.log('Payload РєСЉРј n8n:', payload);
 
-  // Запази локално (за всеки случай)
+  // Р—Р°РїР°Р·Рё Р»РѕРєР°Р»РЅРѕ (Р·Р° РІСЃРµРєРё СЃР»СѓС‡Р°Р№)
   localStorage.setItem('companyPayload', JSON.stringify(payload));
 
-  // Изпращане към n8n (ако е настроен)
+  // РР·РїСЂР°С‰Р°РЅРµ РєСЉРј n8n (Р°РєРѕ Рµ РЅР°СЃС‚СЂРѕРµРЅ)
   let n8nResponse = null;
   try{
     if (!window.N8N_WEBHOOK_URL){
-      console.warn('N8N_WEBHOOK_URL не е зададен. Ще продължим без POST.');
+      console.warn('N8N_WEBHOOK_URL РЅРµ Рµ Р·Р°РґР°РґРµРЅ. Р©Рµ РїСЂРѕРґСЉР»Р¶РёРј Р±РµР· POST.');
     } else {
-      // При webhook-test в n8n, OPTIONS preflight може да "изяде" слушането.
-      // За да избегнем preflight при тест, изпращаме като text/plain.
+      // РџСЂРё webhook-test РІ n8n, OPTIONS preflight РјРѕР¶Рµ РґР° "РёР·СЏРґРµ" СЃР»СѓС€Р°РЅРµС‚Рѕ.
+      // Р—Р° РґР° РёР·Р±РµРіРЅРµРј preflight РїСЂРё С‚РµСЃС‚, РёР·РїСЂР°С‰Р°РјРµ РєР°С‚Рѕ text/plain.
       const isTest = /webhook-test\//.test(window.N8N_WEBHOOK_URL);
       const body = JSON.stringify(payload);
       const headers = isTest ? { 'Content-Type':'text/plain;charset=UTF-8' } : { 'Content-Type':'application/json' };
-      console.log('Изпращам към n8n:', window.N8N_WEBHOOK_URL, { isTest });
+      console.log('РР·РїСЂР°С‰Р°Рј РєСЉРј n8n:', window.N8N_WEBHOOK_URL, { isTest });
       const res = await fetch(window.N8N_WEBHOOK_URL, {
         method: 'POST',
         mode: 'cors',
@@ -82,8 +82,8 @@ form.addEventListener('submit', async (e) => {
       n8nResponse = await res.json();
     }
   }catch(err){
-    console.error('Грешка при изпращане към n8n:', err);
-    errEl.textContent = 'Грешка при изпращане към n8n. Вижте конзолата (F12 → Console).';
+    console.error('Р“СЂРµС€РєР° РїСЂРё РёР·РїСЂР°С‰Р°РЅРµ РєСЉРј n8n:', err);
+    errEl.textContent = 'Р“СЂРµС€РєР° РїСЂРё РёР·РїСЂР°С‰Р°РЅРµ РєСЉРј n8n. Р’РёР¶С‚Рµ РєРѕРЅР·РѕР»Р°С‚Р° (F12 в†’ Console).';
     errEl.hidden = false;
   }
 
@@ -93,6 +93,7 @@ form.addEventListener('submit', async (e) => {
     sessionStorage.removeItem('n8nResponse');
   }
 
-  // Редирект към резултатите
+  // Р РµРґРёСЂРµРєС‚ РєСЉРј СЂРµР·СѓР»С‚Р°С‚РёС‚Рµ
   window.location.href = 'results.html';
 });
+
