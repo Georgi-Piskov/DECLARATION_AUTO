@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="bg">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Р”РµРєР»Р°СЂР°С†РёРё Р·Р° С„РёСЂРјР° Р±РµР· РґРµР№РЅРѕСЃС‚</title>
+  <title>Декларации за фирма без дейност</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon-192.png">
   <meta name="theme-color" content="#0e2a47">
@@ -11,93 +11,94 @@
 </head>
 <body>
   <header class="container">
-    <h1>Р“РµРЅРµСЂРёСЂР°РЅРµ РЅР° РґРµРєР»Р°СЂР°С†РёРё</h1>
-    <p class="subtitle">Р”РµРєР»Р°СЂР°С†РёСЏ Р·Р° РЅРµР°РєС‚РёРІРЅРѕСЃС‚ (РџСЂРёР». в„– 11) Рё Р”РµРєР»Р°СЂР°С†РёСЏ РїРѕ С‡Р». 38, Р°Р». 9, С‚. 2 Р—РЎС‡</p>
+    <h1>Генериране на декларации</h1>
+    <p class="subtitle">Декларация за неактивност (Прил. № 11) и Декларация по чл. 38, ал. 9, т. 2 ЗСч</p>
   </header>
 
   <main class="container card">
     <form id="companyForm" novalidate>
       <div class="grid">
         <div class="field">
-          <label for="eik">Р•РРљ / Р‘СѓР»СЃС‚Р°С‚ *</label>
-          <input id="eik" name="eik" inputmode="numeric" pattern="\d{9}|\d{13}" required placeholder="9 РёР»Рё 13 С†РёС„СЂРё">
-          
+          <label for="eik">ЕИК / Булстат *</label>
+          <input id="eik" name="eik" inputmode="numeric" pattern="\d{9}|\d{13}" required placeholder="9 или 13 цифри">
+          <small class="hint">Само цифри, 9 или 13 символа</small>
         </div>
         <div class="field">
-          <label for="name">РќР°РёРјРµРЅРѕРІР°РЅРёРµ РЅР° РґСЂСѓР¶РµСЃС‚РІРѕС‚Рѕ *</label>
+          <label for="name">Наименование на дружеството *</label>
           <input id="name" name="name" required placeholder="">
         </div>
         <div class="field">
-          <label for="legal">РџСЂР°РІРЅР° С„РѕСЂРјР° *</label>
+          <label for="legal">Правна форма *</label>
           <select id="legal" name="legal" required>
-            <option value="">вЂ” РёР·Р±РµСЂРµС‚Рµ вЂ”</option>
-            <option>Р•РћРћР”</option>
-            <option>РћРћР”</option>
-            <option>РђР”</option>
-            <option>Р•Рў</option>
-            <option>РЎР”</option>
+            <option value="">— изберете —</option>
+            <option>ЕООД</option>
+            <option>ООД</option>
+            <option>АД</option>
+            <option>ЕТ</option>
+            <option>СД</option>
           </select>
         </div>
         <div class="field">
-          <label for="address">РЎРµРґР°Р»РёС‰Рµ Рё Р°РґСЂРµСЃ *</label>
-          <input id="address" name="address" required placeholder="РіСЂ. РЎРѕС„РёСЏ, СѓР». ... в„–...">
+          <label for="address">Седалище и адрес *</label>
+          <input id="address" name="address" required placeholder="гр. София, ул. ... №...">
         </div>
         <div class="field">
-          <label for="manager">РџСЂРµРґСЃС‚Р°РІР»СЏРІР°С‰ (РёРјРµ) *</label>
-          <input id="manager" name="manager" required placeholder="РРјРµ Р¤Р°РјРёР»РёСЏ">
+          <label for="manager">Представляващ (име) *</label>
+          <input id="manager" name="manager" required placeholder="Име Фамилия">
         </div>
         <div class="field">
-          <label for="egn">Р•Р“Рќ РЅР° РїРѕРґР°С‚РµР»СЏ (10 С†РёС„СЂРё)</label>
-          <input id="egn" name="egn" inputmode="numeric" pattern="\d{10}" placeholder="10 С†РёС„СЂРё">
-          
+          <label for="egn">ЕГН на подателя (10 цифри)</label>
+          <input id="egn" name="egn" inputmode="numeric" pattern="\d{10}" placeholder="10 цифри">
         </div>
         <div class="field">
           <label for="email">E-mail *</label>
           <input id="email" name="email" type="email" required placeholder="name@example.com">
         </div>
         <div class="field">
-          <label for="phone">РўРµР»РµС„РѕРЅ *</label>
+          <label for="phone">Телефон *</label>
           <input id="phone" name="phone" required placeholder="+359 ...">
         </div>
         <div class="field">
-          <label for="year">Р“РѕРґРёРЅР° РЅР° РѕС‚С‡РµС‚Р° *</label>
+          <label for="year">Година на отчета *</label>
           <input id="year" name="year" required pattern="\d{4}" placeholder="2025">
         </div>
         <div class="field">
-          <label for="city">РќР°СЃРµР»РµРЅРѕ РјСЏСЃС‚Рѕ *</label>
-          <input id="city" name="city" required placeholder="РіСЂ. РЎРѕС„РёСЏ">
+          <label for="city">Населено място *</label>
+          <input id="city" name="city" required placeholder="гр. София">
         </div>
         <div class="field">
-          <label for="date">Р”Р°С‚Р° *</label>
+          <label for="date">Дата *</label>
           <input id="date" name="date" type="date" required>
         </div>
         <div class="field">
-          <label for="role">РџРѕРґР°Р» РґРµРєР»Р°СЂР°С†РёСЏС‚Р° *</label>
+          <label for="role">Подал декларацията *</label>
           <select id="role" name="role" required>
-            <option value="">вЂ” РёР·Р±РµСЂРµС‚Рµ вЂ”</option>
-            <option>РЈРїСЂР°РІРёС‚РµР»</option>
-            <option>РЎС‡РµС‚РѕРІРѕРґРёС‚РµР»</option>
+            <option value="">— изберете —</option>
+            <option>Управител</option>
+            <option>Счетоводител</option>
           </select>
         </div>
         <div class="field">
-          <label for="ownership">Р¤РѕСЂРјР° РЅР° СЃРѕР±СЃС‚РІРµРЅРѕСЃС‚ *</label>
+          <label for="ownership">Форма на собственост *</label>
           <select id="ownership" name="ownership" required>
-            <option value="">вЂ” РёР·Р±РµСЂРµС‚Рµ вЂ”</option>
-            <option>Р”СЉСЂР¶Р°РІРЅР°</option>
-            <option>РћР±С‰РёРЅСЃРєР°</option>
-            <option>Р§Р°СЃС‚РЅР° РЅР° РјРµСЃС‚РЅРѕ Р»РёС†Рµ</option>
-            <option>Р§Р°СЃС‚РЅР° РЅР° С‡СѓР¶РґРµСЃС‚СЂР°РЅРЅРѕ Р»РёС†Рµ</option>
-            <option>Р§Р°СЃС‚РЅР° РЅР° РЅРµРїСЂР°РІРёС‚РµР»СЃС‚РІРµРЅР° РѕСЂРіР°РЅРёР·Р°С†РёСЏ</option>
+            <option value="">— изберете —</option>
+            <option>Държавна</option>
+            <option>Общинска</option>
+            <option>Частна на местно лице</option>
+            <option>Частна на чуждестранно лице</option>
+            <option>Частна на неправителствена организация</option>
           </select>
         </div>
       </div>
 
       <div class="actions">
-        <button type="submit" id="nextBtn" disabled>РќР°РїСЂРµРґ</button>
+        <button type="submit" id="nextBtn" disabled>Напред</button>
       </div>
       <p id="formError" class="error" hidden></p>
     </form>
-  </main>`n  <aside class="container card" aria-label="Кратка информация">
+  </main>
+
+  <aside class="container card" aria-label="Кратка информация">
     <h2>Какво правиш тук</h2>
     <ul>
       <li>Ако фирмата няма дейност, пак трябва 2 кратки декларации.</li>
@@ -107,11 +108,8 @@
     </ul>
   </aside>
 
-  
-
   <script src="assets/config.js"></script>
   <script type="module" src="assets/app.js"></script>
-  <noscript>Р—Р° РґР° РёР·РїРѕР»Р·РІР°С‚Рµ РїСЂРёР»РѕР¶РµРЅРёРµС‚Рѕ, Р°РєС‚РёРІРёСЂР°Р№С‚Рµ JavaScript.</noscript>
+  <noscript>За да използвате приложението, активирайте JavaScript.</noscript>
 </body>
 </html>
-
